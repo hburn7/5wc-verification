@@ -48,6 +48,7 @@ export class OsuAuthentication extends AuthenticationClient {
                 o.osu.token = _accessToken;
                 o.osu.displayName = profile.displayName;
                 o.osu.joinDate = DateTime.fromISO(profile._json.join_date);
+                console.log(profile._json);
                 return cb(null, o);
             }
         }));
