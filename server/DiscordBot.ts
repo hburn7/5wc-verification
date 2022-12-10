@@ -17,7 +17,7 @@ export default class DiscordBot extends Client {
         this.tourneyConfig = config.config;
 
         this.once('ready', () => {
-            console.log(`o!th bot is ready`)
+            console.log(`5wc verification bot is ready`)
         });
 
         this.on('userVerified', async (guild: Guild, member: GuildMember) => {
@@ -26,7 +26,7 @@ export default class DiscordBot extends Client {
                 const channelId = this.tourneyConfig.discord.welcomeChannelId;
                 const channel = guild.channels.cache.get(channelId) as TextChannel;
 
-                channel.send(`Welcome ${member} you are now verified!`)
+                channel.send(`${member} is now verified`)
             } catch (e) {
                 consola.error(e);
             }

@@ -51,12 +51,12 @@ export default class Server {
             secret: `${process.env.COOKIE_SECRET}`,
             resave: false,
             proxy: true,
-            saveUninitialized: false,
+            saveUninitialized: true,
             cookie: {
                 secure: false,
                 maxAge: 300 * 1000
             },
-            store: new redisStore({ client: redis.getClient(), ttl: 600 }),
+            // store: new redisStore({ client: redis.getClient(), ttl: 600 }),
         }
 
         if (process.env.NODE_ENV === 'production') {
@@ -90,7 +90,7 @@ export default class Server {
         app.use(session(sessionOptions));
         app.use(passport.initialize());
         app.use(passport.session());
-        app.use(helmet());
+        app.use(helmet({ contentSecurityPolicy: false, hsts: false }));
         app.use(rateLimiterMiddleware);
         app.use(bodyParser.json());
         app.use(flash());
