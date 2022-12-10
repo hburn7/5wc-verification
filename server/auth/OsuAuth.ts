@@ -36,9 +36,12 @@ export class OsuAuthentication extends AuthenticationClient {
                         id: `${profile.id}`,
                         displayName: profile.displayName,
                         token: _accessToken,
-                        joinDate: DateTime.fromISO(profile._json.join_date)
+                        joinDate: DateTime.fromISO(profile._json.join_date),
+                        is_restricted: Boolean(profile._json.is_restricted),
                     }
                 }
+
+                console.log(o);
 
                 return cb(null, o);
             } else {
@@ -48,7 +51,8 @@ export class OsuAuthentication extends AuthenticationClient {
                 o.osu.token = _accessToken;
                 o.osu.displayName = profile.displayName;
                 o.osu.joinDate = DateTime.fromISO(profile._json.join_date);
-                console.log(profile._json);
+                o.osu.is_restricted = Boolean(profile._json.is_restricted);
+                console.log(o);
                 return cb(null, o);
             }
         }));
@@ -69,8 +73,17 @@ export class OsuAuthentication extends AuthenticationClient {
         const userJoinDate = u.osu.joinDate!;
 
         // User is allowed to join the discord, so go to verification.
-        if (now > userJoinDate) 
-            res.redirect('/checks/discord');
+        if (now > userJoinDate) {
+            if(u.osu.is_restricted) {
+                u.failureReason = "osu! account is restricted";
+                consola.info(`${u.osu.displayName} attempted to register but is restricted.`);
+                res.redirect('/checks/manual')
+            }
+            else {
+                res.redirect('/checks/discord');
+            }
+        }
+
         // User failed verification so we redirect somewhere else for manual intervention or can customise the error.
          else {
             u.failureReason = "osu! account is not older than 6 months yet";

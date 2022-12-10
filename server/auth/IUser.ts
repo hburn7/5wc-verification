@@ -11,6 +11,7 @@ export interface IUser {
         displayName?: string;
         token?: string;
         joinDate?: DateTime;
+        is_restricted?: boolean;
     }
     failureReason?: string;
 }

@@ -1,8 +1,9 @@
 <template>
   <div id="start">
     <div>
-      <h1>Manual verification required</h1>
-      <p>Please ping the @Moderators role in the verification channel with a screenshot of this page.</p>
+      <h1>Account Screened</h1>
+      <p>You have been pre-screened based on some information from your osu! account. If you believe 
+      this is a mistake, please visit the #tickets channel and open a ticket to contact the Admin team. Thank you.</p>
       <p>Reason: {{ reason }}</p>
     </div>
   </div>
