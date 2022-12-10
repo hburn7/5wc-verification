@@ -58,9 +58,9 @@ export default class Server {
             },
             // store: new redisStore({ client: redis.getClient(), ttl: 600 }),
         }
+        app.set('trust proxy', 1) // trust first proxy
 
         if (process.env.NODE_ENV === 'production') {
-            app.set('trust proxy', 1) // trust first proxy
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             sessionOptions.cookie!.secure = !!parseInt(process.env.COOKIE_SECURE ?? '0')
         }
