@@ -125,8 +125,8 @@ export class DiscordAuthentication extends AuthenticationClient {
             if (value === 1)
                 res.redirect('/full');
             else if (value === 0) {
-                consola.info(process.env.FIVE_WC_API_KEY)
-                // Make API post to thingy
+                // POST registration
+
                 fetch(`https://auth.stagec.xyz/api/register?k=${process.env.FIVE_WC_API_KEY}`, {
                     method: 'POST',
                     body: JSON.stringify({
@@ -140,17 +140,18 @@ export class DiscordAuthentication extends AuthenticationClient {
                     }
                 })
                 .then(response => {
-                    consola.info(response.status)
+                    consola.info(response.status);
+                    consola.info(response);
                 })
                 .catch(error => {
                     user.failureReason = error;
-                    consola.error(error)
-                    res.redirect('/manual')
+                    consola.error(error);
                 })
 
+                res.redirect('/done');
             }
             else
-                res.redirect('/') // TODO: flash error on the frontend.
+                res.redirect('/'); // TODO: flash error on the frontend.
         })
     }
 }
