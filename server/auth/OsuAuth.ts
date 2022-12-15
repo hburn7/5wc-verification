@@ -41,8 +41,6 @@ export class OsuAuthentication extends AuthenticationClient {
                     }
                 }
 
-                console.log(o);
-
                 return cb(null, o);
             } else {
                 const o: IUser = req.user as any;
@@ -52,7 +50,6 @@ export class OsuAuthentication extends AuthenticationClient {
                 o.osu.displayName = profile.displayName;
                 o.osu.joinDate = DateTime.fromISO(profile._json.join_date);
                 o.osu.is_restricted = Boolean(profile._json.is_restricted);
-                console.log(o);
                 return cb(null, o);
             }
         }));

@@ -9,6 +9,7 @@ import { IUser } from './IUser';
 import consola from "consola";
 import passport from "passport";
 import Configuration from '../Configuration';
+import fetch from "node-fetch"
 
 @injectable()
 @autoInjectable()
@@ -123,8 +124,31 @@ export class DiscordAuthentication extends AuthenticationClient {
         success.then(value => {
             if (value === 1)
                 res.redirect('/full');
-            else if (value === 0)
-                res.redirect('/done')
+            else if (value === 0) {
+                consola.info(process.env.FIVE_WC_API_KEY)
+                // Make API post to thingy
+                fetch(`https://auth.stagec.xyz/api/register?k=${process.env.FIVE_WC_API_KEY}`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        osu_id: user.osu.id,
+                        osu_username: user.osu.displayName,
+                        discord_id: user.discord.id,
+                        discord_username: user.discord.displayName
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    consola.info(response.status)
+                })
+                .catch(error => {
+                    user.failureReason = error;
+                    consola.error(error)
+                    res.redirect('/manual')
+                })
+
+            }
             else
                 res.redirect('/') // TODO: flash error on the frontend.
         })
