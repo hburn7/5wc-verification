@@ -127,26 +127,21 @@ export class DiscordAuthentication extends AuthenticationClient {
             else if (value === 0) {
                 // POST registration
 
-                fetch(`https://auth.stagec.xyz/api/register?k=${process.env.FIVE_WC_API_KEY}`, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        osu_id: user.osu.id,
-                        osu_username: user.osu.displayName,
-                        discord_id: user.discord.id,
-                        discord_username: user.discord.displayName
-                    }),
+                axios.post(`https://auth.stagec.xyz/api/register?k=${process.env.FIVE_WC_API_KEY}`, 
+                JSON.stringify({
+                    osu_id: user.osu.id,
+                    osu_username: user.osu.displayName,
+                    discord_id: user.discord.id,
+                    discord_username: user.discord.displayName
+                }), {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 })
-                .then(response => {
-                    consola.info(response.status);
-                    consola.info(response);
-                })
-                .catch(error => {
-                    user.failureReason = error;
-                    consola.error(error);
-                })
+                .catch(reason => {
+                    user.failureReason = reason;
+                    consola.error(reason);
+                });
 
                 res.redirect('/done');
             }
