@@ -1,6 +1,6 @@
 version: '3'
 services:
-  cosette-lite:
+  5wc-site:
     restart: always
     build: . 
     ports:
