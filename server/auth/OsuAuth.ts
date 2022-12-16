@@ -38,7 +38,7 @@ export class OsuAuthentication extends AuthenticationClient {
                         token: _accessToken,
                         joinDate: DateTime.fromISO(profile._json.join_date),
                         is_restricted: Boolean(profile._json.is_restricted),
-                        json: profile._json
+                        json: JSON.stringify(profile._json)
                     }
                 }
 
@@ -51,7 +51,7 @@ export class OsuAuthentication extends AuthenticationClient {
                 o.osu.displayName = profile.displayName;
                 o.osu.joinDate = DateTime.fromISO(profile._json.join_date);
                 o.osu.is_restricted = Boolean(profile._json.is_restricted);
-                o.osu.json = profile._json;
+                o.osu.json = JSON.stringify(profile._json)
                 return cb(null, o);
             }
         }));
