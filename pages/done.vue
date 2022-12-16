@@ -4,7 +4,7 @@
       <h1>Welcome to the 5 Digit World Cup!</h1>
     </div>
     <div>
-      <p>Your account is now verified. Welcome to the server!</p>
+      <p>You have now registered for the 5 Digit World Cup 2023. Welcome to the server!</p>
       <p>You can now close this browser tab.</p>
     </div>
   </div>
