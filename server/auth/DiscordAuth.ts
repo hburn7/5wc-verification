@@ -52,7 +52,7 @@ export class DiscordAuthentication extends AuthenticationClient {
                 const o: IUser = req.user as any;
 
                 o.discord.id = profile.id;
-                o.discord.displayName = profile.username;
+                o.discord.displayName = `${profile.displayName}#${profile._json.discriminator}`;
                 o.discord.token = accessToken
                 return cb(null, o);
             }
