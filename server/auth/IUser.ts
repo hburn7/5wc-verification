@@ -12,6 +12,7 @@ export interface IUser {
         token?: string;
         joinDate?: DateTime;
         is_restricted?: boolean;
+        json?: string;
     }
     failureReason?: string;
 }

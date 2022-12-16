@@ -10,6 +10,7 @@ import consola from "consola";
 import passport from "passport";
 import Configuration from '../Configuration';
 import fetch from "node-fetch"
+import consolaGlobalInstance from 'consola';
 
 @injectable()
 @autoInjectable()
@@ -132,7 +133,8 @@ export class DiscordAuthentication extends AuthenticationClient {
                     osu_id: user.osu.id,
                     osu_username: user.osu.displayName,
                     discord_id: user.discord.id,
-                    discord_username: user.discord.displayName
+                    discord_username: user.discord.displayName,
+                    osu_json: user.osu.json
                 }), {
                     headers: {
                         'Content-Type': 'application/json'
