@@ -66,28 +66,18 @@ export class OsuAuthentication extends AuthenticationClient {
     // Alternatively you can remove everything in the body and just keep: res.redirect('/checks/discord');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected callbackMiddleWare(req: Request, res: Response, next: NextFunction): void {
-        const now = DateTime.now().minus({ months: 6 });
         const u = req.user as IUser;
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const userJoinDate = u.osu.joinDate!;
 
         // User is allowed to join the discord, so go to verification.
-        if (now > userJoinDate) {
-            if(u.osu.is_restricted) {
-                u.failureReason = "osu! account is restricted";
-                consola.info(`${u.osu.displayName} attempted to register but is restricted.`);
-                res.redirect('/checks/manual')
-            }
-            else {
-                res.redirect('/checks/discord');
-            }
+        if(u.osu.is_restricted) {
+            u.failureReason = "osu! account is restricted";
+            consola.info(`${u.osu.displayName} attempted to register but is restricted.`);
+            res.redirect('/checks/manual')
         }
-
-        // User failed verification so we redirect somewhere else for manual intervention or can customise the error.
-         else {
-            u.failureReason = "osu! account is not older than 6 months yet";
-            consola.info(`${u.osu.displayName} joined on ${userJoinDate} needs manual verification.`)
-            res.redirect('/checks/manual');
+        else {
+            res.redirect('/checks/discord');
         }
     }
 }
