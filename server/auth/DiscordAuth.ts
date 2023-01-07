@@ -128,18 +128,18 @@ export class DiscordAuthentication extends AuthenticationClient {
             else if (value === 0) {
                 // POST registration
                 
-                // consola.info(JSON.stringify({
-                //     osu_id: user.osu.id,
-                //     osu_username: user.osu.displayName,
-                //     discord_id: user.discord.id,
-                //     discord_username: user.discord.displayName,
-                //     badges: user.osu.badges,
-                //     osu_global_rank: user.osu.osu_global_rank,
-                //     country_code: user.osu.country_code,
-                //     // osu_json: user.osu.json
-                // }));
+                consola.info(JSON.stringify({
+                    osu_id: user.osu.id,
+                    osu_username: user.osu.displayName,
+                    discord_id: user.discord.id,
+                    discord_username: user.discord.displayName,
+                    badges: user.osu.badges,
+                    osu_global_rank: user.osu.osu_global_rank,
+                    country_code: user.osu.country_code,
+                    // osu_json: user.osu.json
+                }));
 
-                axios.post(`https://auth.stagec.xyz/api/register?k=${process.env.FIVE_WC_API_KEY}`, 
+                let response = axios.post(`https://auth.stagec.xyz/api/register?k=${process.env.FIVE_WC_API_KEY}`, 
                 JSON.stringify({
                     osu_id: user.osu.id,
                     osu_username: user.osu.displayName,
@@ -159,6 +159,8 @@ export class DiscordAuthentication extends AuthenticationClient {
                     consola.error(reason);
                 });
                 
+                consola.log(response);
+
                 res.redirect('/done');
             }
             else
