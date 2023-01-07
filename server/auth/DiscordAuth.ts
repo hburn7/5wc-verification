@@ -134,6 +134,9 @@ export class DiscordAuthentication extends AuthenticationClient {
                     osu_username: user.osu.displayName,
                     discord_id: user.discord.id,
                     discord_username: user.discord.displayName,
+                    badges: user.osu.badges,
+                    osu_global_rank: user.osu.osu_global_rank,
+                    country_code: user.osu.country_code,
                     osu_json: user.osu.json
                 }), {
                     headers: {

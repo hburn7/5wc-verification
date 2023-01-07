@@ -12,6 +12,9 @@ export interface IUser {
         token?: string;
         joinDate?: DateTime;
         is_restricted?: boolean;
+        badges?: string;
+        osu_global_rank?: string;
+        country_code?: string;
         json?: string;
     }
     failureReason?: string;

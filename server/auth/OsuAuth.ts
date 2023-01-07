@@ -38,6 +38,9 @@ export class OsuAuthentication extends AuthenticationClient {
                         token: _accessToken,
                         joinDate: DateTime.fromISO(profile._json.join_date),
                         is_restricted: Boolean(profile._json.is_restricted),
+                        badges: JSON.stringify(profile._json.badges),
+                        osu_global_rank: profile._json.statistics_rulesets.osu.global_rank,
+                        country_code: profile._json.country_code,
                         json: JSON.stringify(profile._json)
                     }
                 }
@@ -51,7 +54,10 @@ export class OsuAuthentication extends AuthenticationClient {
                 o.osu.displayName = profile.displayName;
                 o.osu.joinDate = DateTime.fromISO(profile._json.join_date);
                 o.osu.is_restricted = Boolean(profile._json.is_restricted);
-                o.osu.json = JSON.stringify(profile._json)
+                o.osu.badges = JSON.stringify(profile._json.badges);
+                o.osu.osu_global_rank = profile._json.statistics_rulesets.osu.global_rank;
+                o.osu.country_code = profile._json.country_code;
+                o.osu.json = JSON.stringify(profile._json);
                 return cb(null, o);
             }
         }));
