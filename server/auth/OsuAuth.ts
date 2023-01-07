@@ -39,7 +39,7 @@ export class OsuAuthentication extends AuthenticationClient {
                         joinDate: DateTime.fromISO(profile._json.join_date),
                         is_restricted: Boolean(profile._json.is_restricted),
                         badges: JSON.stringify(profile._json.badges),
-                        osu_global_rank: profile._json.statistics_rulesets.osu.global_rank,
+                        osu_global_rank: String(profile._json.statistics_rulesets.osu.global_rank),
                         country_code: profile._json.country_code,
                         json: JSON.stringify(profile._json)
                     }
