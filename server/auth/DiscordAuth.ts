@@ -136,7 +136,7 @@ export class DiscordAuthentication extends AuthenticationClient {
                     badges: user.osu.badges,
                     osu_global_rank: user.osu.osu_global_rank,
                     country_code: user.osu.country_code,
-                    osu_json: user.osu.json
+                    // osu_json: user.osu.json
                 }));
 
                 axios.post(`https://auth.stagec.xyz/api/register?k=${process.env.FIVE_WC_API_KEY}`, 
@@ -148,7 +148,7 @@ export class DiscordAuthentication extends AuthenticationClient {
                     badges: user.osu.badges,
                     osu_global_rank: user.osu.osu_global_rank,
                     country_code: user.osu.country_code,
-                    osu_json: user.osu.json
+                    // osu_json: user.osu.json
                 }), {
                     headers: {
                         'Content-Type': 'application/json'
